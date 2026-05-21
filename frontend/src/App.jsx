@@ -33,7 +33,7 @@ function App() {
   // Fetch all projects from database engine
   const fetchProjects = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/projects');
+      const res = await fetch('https://motivator-backrest-coastland.ngrok-free.dev/api/projects');
       const data = await res.json();
       setProjects(data);
     } catch (err) {
@@ -44,7 +44,7 @@ function App() {
   // Fetch all tasks for a specific clicked project
   const fetchTasks = async (projectId) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/tasks/project/${projectId}`);
+      const res = await fetch(`https://motivator-backrest-coastland.ngrok-free.dev/api/tasks/project/${projectId}`);
       const data = await res.json();
       setTasks(data);
     } catch (err) {
@@ -61,7 +61,7 @@ function App() {
     const payload = isLogin ? { email, password } : { name, email, password, role };
 
     try {
-      const response = await fetch(`http://localhost:5000${endpoint}`, {
+      const response = await fetch(`https://motivator-backrest-coastland.ngrok-free.dev${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -77,7 +77,7 @@ function App() {
         setUser(data.user);
         localStorage.setItem('user', JSON.stringify(data.user));
         // Immediately load system data boards
-        const resProj = await fetch('http://localhost:5000/api/projects');
+        const resProj = await fetch('https://motivator-backrest-coastland.ngrok-free.dev/api/projects');
         const projData = await resProj.json();
         setProjects(projData);
       } else {
@@ -97,7 +97,7 @@ function App() {
   const handleCreateProject = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/projects', {
+      const res = await fetch('https://motivator-backrest-coastland.ngrok-free.dev/api/projects', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -123,7 +123,7 @@ function App() {
   const handleCreateTask = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/tasks', {
+      const res = await fetch('https://motivator-backrest-coastland.ngrok-free.dev/api/tasks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -150,7 +150,7 @@ function App() {
     if (currentStatus === 'Completed') nextStatus = 'Pending';
 
     try {
-      await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
+      await fetch(`https://motivator-backrest-coastland.ngrok-free.dev/api/tasks/${taskId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: nextStatus })
@@ -186,15 +186,14 @@ function App() {
           <hr style={{ borderColor: '#334155' }} />
 
           {/* Admin Control Module for adding projects */}
-          {/* Admin Control Module for adding projects */}
-{user.role === 'Admin' && (
-  <form onSubmit={handleCreateProject} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-    <h4 style={{ margin: '0 0 4px 0', color: '#3b82f6', fontSize: '14px' }}>+ Launch New Project</h4>
-    <input type="text" placeholder="Project Name" value={newProjectName} onChange={(e) => setNewProjectName(e.target.value)} required style={{ padding: '8px', borderRadius: '4px', border: 'none', fontSize: '13px', color: '#1e293b', backgroundColor: '#ffffff' }} />
-    <input type="text" placeholder="Short Description" value={newProjectDesc} onChange={(e) => setNewProjectDesc(e.target.value)} style={{ padding: '8px', borderRadius: '4px', border: 'none', fontSize: '13px', color: '#1e293b', backgroundColor: '#ffffff' }} />
-    <button type="submit" style={{ backgroundColor: '#2563eb', color: '#fff', border: 'none', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '13px' }}>Create Project</button>
-  </form>
-)}
+          {user.role === 'Admin' && (
+            <form onSubmit={handleCreateProject} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <h4 style={{ margin: '0 0 4px 0', color: '#3b82f6', fontSize: '14px' }}>+ Launch New Project</h4>
+              <input type="text" placeholder="Project Name" value={newProjectName} onChange={(e) => setNewProjectName(e.target.value)} required style={{ padding: '8px', borderRadius: '4px', border: 'none', fontSize: '13px', color: '#1e293b', backgroundColor: '#ffffff' }} />
+              <input type="text" placeholder="Short Description" value={newProjectDesc} onChange={(e) => setNewProjectDesc(e.target.value)} style={{ padding: '8px', borderRadius: '4px', border: 'none', fontSize: '13px', color: '#1e293b', backgroundColor: '#ffffff' }} />
+              <button type="submit" style={{ backgroundColor: '#2563eb', color: '#fff', border: 'none', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '13px' }}>Create Project</button>
+            </form>
+          )}
           <div>
             <h3 style={{ fontSize: '14px', textTransform: 'uppercase', color: '#64748b', letterSpacing: '1px', marginBottom: '12px' }}>Active Projects</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -264,7 +263,7 @@ function App() {
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', fontFamily: 'sans-serif', padding: '20px' }}>
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-        <div style={{ background: '#2563eb', color: '#ffffff', fontSize: '24px', fontWeight: 'bold', width: '50px', height: '50px', borderRadius: '12px', display: 'inline-flex', alignItems: 'center', justifycenter: 'center', marginBottom: '12px', lineHeight: '50px' }}>T</div>
+        <div style={{ background: '#2563eb', color: '#ffffff', fontSize: '24px', fontWeight: 'bold', width: '50px', height: '50px', borderRadius: '12px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '12px', lineHeight: '50px' }}>T</div>
         <h1 style={{ color: '#ffffff', fontSize: '28px', fontWeight: '800', margin: '0' }}>Sync<span style={{ color: '#3b82f6' }}>Task</span></h1>
         <p style={{ color: '#94a3b8', fontSize: '14px', marginTop: '6px' }}>Enterprise Role-Based Task Management Engine</p>
       </div>
