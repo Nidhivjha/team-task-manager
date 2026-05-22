@@ -33,7 +33,7 @@ function App() {
   // Fetch all projects from database engine
   const fetchProjects = async () => {
     try {
-      const res = await fetch('https://eleven-dodos-look.loca.lt/api/projects');
+      const res = await fetch('https://team-task-manager-ovg2.onrender.com/api/projects');
       const data = await res.json();
       setProjects(data);
     } catch (err) {
@@ -44,7 +44,7 @@ function App() {
   // Fetch all tasks for a specific clicked project
   const fetchTasks = async (projectId) => {
     try {
-      const res = await fetch(`https://eleven-dodos-look.loca.lt/api/tasks/project/${projectId}`);
+      const res = await fetch(`https://team-task-manager-ovg2.onrender.com/api/tasks/project/${projectId}`);
       const data = await res.json();
       setTasks(data);
     } catch (err) {
@@ -61,7 +61,7 @@ function App() {
     const payload = isLogin ? { email, password } : { name, email, password, role };
 
     try {
-      const response = await fetch(`https://eleven-dodos-look.loca.lt${endpoint}`, {
+      const response = await fetch(`https://team-task-manager-ovg2.onrender.com${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -77,7 +77,7 @@ function App() {
         setUser(data.user);
         localStorage.setItem('user', JSON.stringify(data.user));
         // Immediately load system data boards
-        const resProj = await fetch('https://eleven-dodos-look.loca.lt/api/projects');
+        const resProj = await fetch('https://team-task-manager-ovg2.onrender.com/api/projects');
         const projData = await resProj.json();
         setProjects(projData);
       } else {
@@ -97,7 +97,7 @@ function App() {
   const handleCreateProject = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('https://eleven-dodos-look.loca.lt/api/projects', {
+      const res = await fetch('https://team-task-manager-ovg2.onrender.com/api/projects', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -123,7 +123,7 @@ function App() {
   const handleCreateTask = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('https://eleven-dodos-look.loca.lt/api/tasks', {
+      const res = await fetch('https://team-task-manager-ovg2.onrender.com/api/tasks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -150,7 +150,7 @@ function App() {
     if (currentStatus === 'Completed') nextStatus = 'Pending';
 
     try {
-      await fetch(`https://eleven-dodos-look.loca.lt/api/tasks/${taskId}`, {
+      await fetch(`https://team-task-manager-ovg2.onrender.com/api/tasks/${taskId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: nextStatus })
